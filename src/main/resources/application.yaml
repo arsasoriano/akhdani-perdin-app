@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: perdin-app
+  datasource:
+    url: jdbc:oracle:thin:@//192.168.100.78:1521/FREE
+    username: system
+    password: welcome1
+    hikari:
+      idle-timeout: 10000
+      maximum-pool-size: 5
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  thymeleaf:
+    cache: false
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+server:
+  port: 8080

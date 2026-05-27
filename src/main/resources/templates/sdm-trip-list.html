@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>
+        SDM Approval
+    </title>
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <div class="d-flex justify-content-between">
+        <h2>
+            Approval Business Trip
+        </h2>
+        <a
+                href="/sdm/dashboard"
+                class="btn btn-secondary">
+            Dashboard
+        </a>
+    </div>
+    <div class="card mt-3 p-3 shadow">
+        <table
+                class="table table-bordered table-striped">
+            <thead
+                    class="table-dark">
+            <tr>
+                <th>No</th>
+                <th>Pegawai</th>
+                <th>Purpose</th>
+                <th>Origin</th>
+                <th>Destination</th>
+                <th>Duration</th>
+                <th>Total Allowance</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+                    th:if="${#lists.isEmpty(trips)}">
+                <td
+                        colspan="9"
+                        class="text-center">
+                    No Data
+                </td>
+            </tr>
+            <tr
+                    th:each="trip, iter : ${trips}">
+                <td
+                        th:text="${iter.count}">
+                </td>
+                <td
+                        th:text="${trip.user.username}">
+                </td>
+                <td
+                        th:text="${trip.purpose}">
+                </td>
+                <td
+                        th:text="${trip.originCity.cityName}">
+                </td>
+                <td
+                        th:text="${trip.destinationCity.cityName}">
+                </td>
+                <td
+                        th:text="${trip.duration}">
+                </td>
+                <td
+                        th:text="${trip.allowance}">
+                </td>
+                <td>
+                    <span
+                            class=
+                                    "badge bg-warning"
+
+                            th:if=
+                                    "${trip.status.name()
+== 'PENDING'}"
+
+                            th:text=
+                                    "${trip.status}">
+                    </span>
+
+                    <span
+                            class=
+                                    "badge bg-success"
+
+                            th:if=
+                                    "${trip.status.name()
+== 'APPROVED'}"
+
+                            th:text=
+                                    "${trip.status}">
+                    </span>
+
+                    <span
+                            class=
+                                    "badge bg-danger"
+
+                            th:if=
+                                    "${trip.status.name()
+== 'REJECTED'}"
+
+                            th:text=
+                                    "${trip.status}">
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <div
+                            th:if=
+                                    "${trip.status.name()
+== 'PENDING'}">
+
+                        <a
+                                th:href=
+                                        "@{/sdm/trip/approve/{id}
+(id=${trip.id})}"
+
+                                class=
+                                        "btn btn-success btn-sm">
+
+                            Approve
+
+                        </a>
+
+                        <a
+                                th:href=
+                                        "@{/sdm/trip/reject/{id}
+(id=${trip.id})}"
+
+                                class=
+                                        "btn btn-danger btn-sm">
+
+                            Reject
+
+                        </a>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>
