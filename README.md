@@ -1,4 +1,4 @@
-# Employee Business Trip Management System (Perdin App)
+# Perdin App
 
 Aplikasi pengelolaan perjalanan dinas (Perdin) pegawai berbasis web menggunakan Java Spring Boot.
 
